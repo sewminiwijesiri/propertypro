@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     } elseif ($username === $moderator_username && $password === $moderator_password) {
         $_SESSION['moderator_logged_in'] = true;
-        header("Location: mod.php");
+        header("Location: ../mod/mod.php");
         exit();
     } elseif ($username === $customer_support_username && $password === $customer_support_password) {
         $_SESSION['support_logged_in'] = true;

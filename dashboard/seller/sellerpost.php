@@ -10,7 +10,7 @@ $sellerID=$_SESSION['sellerID'];
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
-    $ptitle = $_POST["title"];
+    $ptitle = $_POST["type"];
     $pdescrip = $_POST["description"];
     $plocation = $_POST["location"];
     $pprice = $_POST["price"];
@@ -18,13 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Handle the file upload
     $targetDir = "uploads/"; // Folder where the images will be stored
-    $fileName = basename($_FILES["propertyImage"]["name"]);
+    $fileName = basename($_FILES["img"]["name"]);
     $targetFile = $targetDir . $fileName;
 
     // Move the uploaded image to the 'uploads/' folder
-    if (move_uploaded_file($_FILES["propertyImage"]["tmp_name"], $targetFile)) {
+    if (move_uploaded_file($_FILES["img"]["tmp_name"], $targetFile)) {
         // Save the post details along with the image path in the database
-        $sql = "INSERT INTO post VALUES ('', '$sellerID', '$targetFile', '$ptitle', '$pdescrip', '$plocation', '$pprice','$pcontact','pending')";
+        $sql = "INSERT INTO post VALUES ('', '$sellerID', '$targetFile', '$ptitle', '$pdescrip', '$plocation', '$pprice','$pcontact','Pending')";
 
         if ($conn->query($sql) === TRUE) {
             echo "Post submitted successfully!";
