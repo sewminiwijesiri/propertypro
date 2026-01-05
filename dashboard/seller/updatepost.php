@@ -1,27 +1,44 @@
 <?php
+session_start();
 require '../../includes/config.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $postID = $_POST['postid'];
-    $title = $_POST['title'];
-    $description = $_POST['description'];
-    $location = $_POST['location'];
-    $price = $_POST['price'];
-    $contact=$_POST['contact'];
-
-    // Update the post details in the database
-    $sql = "UPDATE post SET type='$title', description='$description', location='$location', price='$price',contact='$contact' WHERE postID='$postID'";
-
-    if ($conn->query($sql) === TRUE) {
-        echo "Post updated successfully!";
-    } else {
-        echo "Error updating post: " . $conn->error;
-    }
-
-    // Redirect back to the seller dashboard
-    header("Location: seller.php");
+// Security Check
+if (!isset($_SESSION['sellerID'])) {
+    header("Location: ../../login.php");
     exit();
 }
 
-$conn->close();
+$sellerID = $_SESSION['sellerID'];
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['postid'])) {
+    $postID = $conn->real_escape_string($_POST['postid']);
+    $type = $conn->real_escape_string($_POST['type']);
+    $description = $conn->real_escape_string($_POST['description']);
+    $location = $conn->real_escape_string($_POST['location']);
+    $price = $conn->real_escape_string($_POST['price']);
+    $contact = $conn->real_escape_string($_POST['contact']);
+
+    // Security check: Ensure this post belongs to the logged-in seller
+    $sql = "UPDATE post SET 
+            type = '$type', 
+            description = '$description', 
+            location = '$location', 
+            price = '$price', 
+            contact = '$contact',
+            status = 'Pending' 
+            WHERE postID = '$postID' AND sellerID = '$sellerID'";
+
+    if ($conn->query($sql) === TRUE) {
+        // Redirection with success message (simplified)
+        header("Location: seller.php?updated=1");
+    } else {
+        echo "Error: " . $conn->error;
+    }
+    
+    $conn->close();
+    exit();
+} else {
+    header("Location: seller.php");
+    exit();
+}
 ?>
