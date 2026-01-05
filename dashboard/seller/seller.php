@@ -1,7 +1,42 @@
 <?php
-require '../../includes/config.php';
 session_start();
-// Minimal placeholder dashboard
+require '../../includes/config.php';
+
+// Security Check
+if (!isset($_SESSION['sellerID'])) {
+    header("Location: ../../login.php");
+    exit();
+}
+
+$sellerID = $_SESSION['sellerID'];
+
+// Fetch Seller Name
+$sellerName = "Seller";
+$nameSql = "SELECT Name FROM seller WHERE sellerID = '$sellerID'";
+$nameResult = $conn->query($nameSql);
+if ($nameResult && $row = $nameResult->fetch_assoc()) {
+    $sellerName = $row['Name'];
+}
+
+// Fetch Stats
+$activeListings = 0;
+$totalRevenue = 0;
+$pendingApprovals = 0;
+
+// Active Listings (Approved)
+$activeSql = "SELECT count(*) as total FROM post WHERE sellerID = '$sellerID' AND status = 'Approved'";
+$activeRes = $conn->query($activeSql);
+if ($activeRes) $activeListings = $activeRes->fetch_assoc()['total'];
+
+// Total Revenue (Sum of approved prices - simplified for demo)
+$revSql = "SELECT sum(price) as total FROM post WHERE sellerID = '$sellerID' AND status = 'Approved'";
+$revRes = $conn->query($revSql);
+if ($revRes) $totalRevenue = $revRes->fetch_assoc()['total'] ?? 0;
+
+// Pending Reviews
+$pendSql = "SELECT count(*) as total FROM post WHERE sellerID = '$sellerID' AND status = 'Pending'";
+$pendRes = $conn->query($pendSql);
+if ($pendRes) $pendingApprovals = $pendRes->fetch_assoc()['total'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -305,17 +340,17 @@ session_start();
                 <a href="../../chatbox.php" class="nav-link"><i class='bx bxs-message-dots'></i> Shared Messages</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link"><i class='bx bxs-user-detail'></i> Profile Profile</a>
+                <a href="sellerprofile.php" class="nav-link"><i class='bx bxs-user-detail'></i> Profile</a>
             </li>
         </ul>
 
-        <a href="../../home.php" class="logout-btn"><i class='bx bx-log-out'></i> Log Out</a>
+        <a href="../../logout.php" class="logout-btn"><i class='bx bx-log-out'></i> Log Out</a>
     </div>
 
     <div class="main-content">
         <header class="header">
             <div>
-                <h1>Hello, Seller!</h1>
+                <h1>Hello, <?php echo htmlspecialchars($sellerName); ?>!</h1>
                 <p style="color: var(--slate); font-weight: 500;">Manage your property portfolio here.</p>
             </div>
             <div class="user-pill">
@@ -326,27 +361,30 @@ session_start();
 
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-icon" style="background: rgba(59, 130, 246, 0.1); color: var(--blue);"><i
-                        class='bx bxs-home-circle'></i></div>
+                <div class="stat-icon" style="background: rgba(59, 130, 246, 0.1); color: var(--blue);">
+                    <i class='bx bxs-home-circle'></i>
+                </div>
                 <div class="stat-info">
-                    <h3>8</h3>
-                    <p>Active Listings</p>
+                    <h3><?php echo $activeListings; ?></h3>
+                    <p>Live Listings</p>
                 </div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--emerald);"><i
-                        class='bx bxs-bullseye'></i></div>
+                <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--emerald);">
+                    <i class='bx bxs-check-shield'></i>
+                </div>
                 <div class="stat-info">
-                    <h3>1.2M</h3>
-                    <p>Total Revenue</p>
+                    <h3>LKR <?php echo number_format($totalRevenue / 1000000, 1); ?>M</h3>
+                    <p>Portfolio Value</p>
                 </div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon" style="background: rgba(168, 85, 247, 0.1); color: #a855f7;"><i
-                        class='bx bxs-message-rounded-dots'></i></div>
+                <div class="stat-icon" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">
+                    <i class='bx bxs-time-five'></i>
+                </div>
                 <div class="stat-info">
-                    <h3>24</h3>
-                    <p>Lead Messages</p>
+                    <h3><?php echo $pendingApprovals; ?></h3>
+                    <p>Pending Review</p>
                 </div>
             </div>
         </div>
@@ -389,7 +427,74 @@ session_start();
                 <button type="submit" class="submit-btn" name="submit">Scale Listing live</button>
             </form>
         </div>
+        <div class="card" style="margin-top: 3rem;">
+            <h2>Your Property Listings</h2>
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
+                    <thead>
+                        <tr style="text-align: left; border-bottom: 2px solid #f1f5f9;">
+                            <th style="padding: 1rem;">Preview</th>
+                            <th style="padding: 1rem;">Type</th>
+                            <th style="padding: 1rem;">Location</th>
+                            <th style="padding: 1rem;">Price</th>
+                            <th style="padding: 1rem;">Status</th>
+                            <th style="padding: 1rem;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $listSql = "SELECT * FROM post WHERE sellerID = '$sellerID' ORDER BY postID DESC";
+                        $listRes = $conn->query($listSql);
+                        if ($listRes && $listRes->num_rows > 0) {
+                            while($item = $listRes->fetch_assoc()) {
+                                $statusClass = $item['status'] == 'Approved' ? 'badge-success' : ($item['status'] == 'Rejected' ? 'badge-danger' : 'badge-pending');
+                                ?>
+                                <tr style="border-bottom: 1px solid #f8fafc;">
+                                    <td style="padding: 1rem;">
+                                        <img src="<?php echo htmlspecialchars($item['img']); ?>" style="width: 60px; height: 45px; object-fit: cover; border-radius: 8px;">
+                                    </td>
+                                    <td style="padding: 1rem; font-weight: 600;"><?php echo htmlspecialchars($item['type']); ?></td>
+                                    <td style="padding: 1rem; color: var(--slate);"><?php echo htmlspecialchars($item['location']); ?></td>
+                                    <td style="padding: 1rem; font-weight: 700;">LKR <?php echo number_format($item['price']); ?></td>
+                                    <td style="padding: 1rem;">
+                                        <span class="badge <?php echo $statusClass; ?>"><?php echo $item['status']; ?></span>
+                                    </td>
+                                    <td style="padding: 1rem; display: flex; gap: 0.5rem;">
+                                        <a href="editpost.php?postid=<?php echo $item['postID']; ?>" style="background: #dbeafe; color: #2563eb; border: none; padding: 0.5rem; border-radius: 8px; cursor: pointer; text-decoration: none; display: flex; align-items: center;">
+                                            <i class='bx bx-edit-alt'></i>
+                                        </a>
+                                        <form action="deletepost.php" method="POST" onsubmit="return confirm('Delete this property?')">
+                                            <input type="hidden" name="postid" value="<?php echo $item['postID']; ?>">
+                                            <button type="submit" style="background: #fee2e2; color: #ef4444; border: none; padding: 0.5rem; border-radius: 8px; cursor: pointer;">
+                                                <i class='bx bx-trash'></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                        } else {
+                            echo "<tr><td colspan='6' style='padding: 3rem; text-align: center; color: var(--slate);'>You haven't posted any properties yet.</td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-</body>
 
+    <!-- Additional Styles for Table Badges -->
+    <style>
+        .badge {
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge-success { background: #dcfce7; color: #166534; }
+        .badge-pending { background: #fef9c3; color: #854d0e; }
+        .badge-danger { background: #fee2e2; color: #991b1b; }
+    </style>
+</body>
 </html>
