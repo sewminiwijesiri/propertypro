@@ -3,8 +3,8 @@ session_start();
 require '../includes/config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
-    $password = $_POST['password']; 
+    $username = $_POST['Username'];
+    $password = $_POST['Password']; 
     $role = $_POST['role']; 
 
     // SQL query based on user role
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 echo "<script>
                     alert('Login successful!');
-                    window.location.href='" . ($role == 'Seller' ? 'seller.php' : 'buyer.php') . "';
+                    window.location.href='" . ($role == 'Seller' ? '../dashboard/seller/seller.php' : '../dashboard/buyer/buyer.php') . "';
                 </script>";
                 exit();
             } else {
