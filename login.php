@@ -6,23 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Property Pro</title>
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
-
-        :root {
-            --primary: #1e293b;
-            --blue: #3b82f6;
-            --white: #ffffff;
-            --shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Outfit', sans-serif;
-        }
-
         body {
             min-height: 100vh;
             background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
@@ -38,7 +23,7 @@
             max-width: 480px;
             padding: 4rem 3rem;
             border-radius: 40px;
-            box-shadow: var(--shadow);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
@@ -51,43 +36,15 @@
             display: block;
         }
 
-        .logo span {
-            color: var(--blue);
-        }
+        .logo span { color: var(--blue); }
+        h2 { font-size: 2rem; margin-bottom: 1rem; color: var(--primary); }
+        p { color: #64748b; margin-bottom: 3rem; }
 
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
+        form { display: flex; flex-direction: column; gap: 1.5rem; }
+        .input-group { position: relative; }
+        .input-group i { position: absolute; left: 1.2rem; top: 50%; transform: translateY(-50%); color: #94a3b8; font-size: 1.2rem; }
 
-        p {
-            color: #64748b;
-            margin-bottom: 3rem;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .input-group {
-            position: relative;
-        }
-
-        .input-group i {
-            position: absolute;
-            left: 1.2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #94a3b8;
-            font-size: 1.2rem;
-        }
-
-        input[type="text"],
-        input[type="password"],
-        input[type="email"] {
+        input[type="text"], input[type="password"], input[type="email"] {
             width: 100%;
             padding: 1.2rem 1.2rem 1.2rem 3.5rem;
             background: #f8fafc;
@@ -98,45 +55,11 @@
             font-size: 1rem;
         }
 
-        input:focus {
-            border-color: var(--blue);
-            background: white;
-        }
-
-        .role-selector {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .role-option {
-            flex: 1;
-            position: relative;
-        }
-
-        .role-option input {
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .role-label {
-            display: block;
-            padding: 1rem;
-            background: #f8fafc;
-            border: 2px solid #f1f5f9;
-            border-radius: 15px;
-            font-weight: 700;
-            color: #64748b;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .role-option input:checked+.role-label {
-            background: rgba(59, 130, 246, 0.05);
-            border-color: var(--blue);
-            color: var(--blue);
-        }
+        .role-selector { display: flex; gap: 1rem; margin-bottom: 0.5rem; }
+        .role-option { flex: 1; position: relative; }
+        .role-option input { position: absolute; opacity: 0; cursor: pointer; }
+        .role-label { display: block; padding: 1rem; background: #f8fafc; border: 2px solid #f1f5f9; border-radius: 15px; font-weight: 700; color: #64748b; cursor: pointer; transition: 0.3s; }
+        .role-option input:checked+.role-label { background: rgba(59, 130, 246, 0.05); border-color: var(--blue); color: var(--blue); }
 
         .submit-btn {
             background: var(--primary);
@@ -151,33 +74,10 @@
             margin-top: 1rem;
         }
 
-        .submit-btn:hover {
-            background: var(--blue);
-            transform: scale(1.02);
-        }
-
-        .footer-text {
-            margin-top: 2.5rem;
-            color: #64748b;
-        }
-
-        .footer-text a {
-            color: var(--blue);
-            text-decoration: none;
-            font-weight: 700;
-        }
-
-        .back-home {
-            position: absolute;
-            top: 2rem;
-            left: 2rem;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+        .submit-btn:hover { background: var(--blue); transform: scale(1.02); }
+        .footer-text { margin-top: 2.5rem; color: #64748b; }
+        .footer-text a { color: var(--blue); text-decoration: none; font-weight: 700; }
+        .back-home { position: absolute; top: 2rem; left: 2rem; color: var(--primary); text-decoration: none; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; }
     </style>
 </head>
 
@@ -189,7 +89,7 @@
         <h2>Welcome Back</h2>
         <p>Log in to your account to continue</p>
 
-        <form action="loginform.php" method="POST">
+        <form action="actions/loginform.php" method="POST">
             <div class="role-selector">
                 <div class="role-option">
                     <input type="radio" name="role" value="Buyer" id="buyer" checked>

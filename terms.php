@@ -1,46 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms</title>
-    <link rel="stylesheet" href="assets/css/terms.css">
-    <link rel="stylesheet"href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-</head>
-<body>
-    <header id="navbar">
+<?php
+$pageTitle = "Terms and Conditions";
+$baseUrl = "./";
+include 'includes/header.php';
+?>
 
-        <div class="head">
-            <h1>Property<span>pro</span></h1>
-        </div>
+<style>
+    /* Specific styles for Policy Pages */
+    body { padding-top: 100px; }
+    .policy-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 4rem 2rem;
+        background: white;
+        border-radius: 40px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+        border: 1px solid #f1f5f9;
+        margin-bottom: 5rem;
+    }
 
-        
-        <input type="checkbox" id="check">
+    .policy-header { text-align: center; margin-bottom: 4rem; }
+    .policy-header h1 { font-size: 3rem; color: var(--primary); }
+    
+    .policy-content h2 { font-size: 1.5rem; margin: 2rem 0 1rem; color: var(--blue); }
+    .policy-content p { color: var(--slate); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.05rem; }
+</style>
 
-        <nav class="navbar">
-            <ul>
-                <li><a href="home.php">Home</a></li>
-                <li><a href="property.php">Property</a></li>
-                <li><a href="aboutus.php">About Us</a></li>
-                <li><a href="contact.php">Contact Us</a></li>
-            </ul>
-        </nav>
-        <div class="nav-icon">
-            <a href="home.php"><abbr title="Home"><i class='bx bxs-home'></i></abbr></a>
-            <a href="login.php"><abbr title="Login/Sign Up"><i class='bx bx-user'></i></abbr></a>
-            <div id="chat-icon" onclick="href='chat.php'">
-                <a href="chat.php"><abbr title="chatBox"><i class='bx bxs-message-rounded-dots'></i></abbr></a>
-            </div>
-        </div>
-
-        <label for="check" class="menu-btn">
-            <i class='bx bx-menu'></i>
-        </label>
-
-    </header>
-
-    <section class="terms-container">
+<section class="policy-container">
+    <div class="policy-header">
         <h1>Terms and Conditions</h1>
+    </div>
+    
+    <div class="policy-content">
         <p>Welcome to PropertyPro! Please read these terms and conditions carefully before using our website.</p>
 
         <h2>1. Acceptance of Terms</h2>
@@ -65,68 +55,11 @@
         <p>We reserve the right to terminate or suspend your access to the website without prior notice if you violate these Terms.</p>
 
         <h2>8. Governing Law</h2>
-        <p>These Terms are governed by the laws of [Your Country]. Any disputes will be handled in the appropriate court within the jurisdiction.</p>
+        <p>These Terms are governed by the laws of Sri Lanka. Any disputes will be handled in the appropriate court within the jurisdiction.</p>
 
         <p>By continuing to use PropertyPro, you agree to these Terms and Conditions. If you have any questions, feel free to contact us at support@propertypro.com.</p>
-    </section>
+    </div>
+</section>
 
-    <hr>
-    <footer>
-        <section>
-            <div class="contact">
-                <div class="first-info">
-                    <div class="head">
-                        <h1>Property<span>pro</span></h1>
-                    </div>
-                </div>
-                <div class="details">
-                    <h3>Contact Us</h3>
-                    <p><i class='bx bxs-phone-call'></i>0778986338</p>
-                    <p><i class='bx bxs-envelope' ></i>propertypro@gmail.com</p>
-                </div>
-                <div class="second-info">
-                    <ul>
-                    <h3>Navigation</h3>
-                    <li><a href="home.php">Home</a></li>
-                    <li><a href="property.php">Property</a></li>
-                    <li><a href="aboutus.php">About Us</a></li>
-                    <li><a href="contact.php">Contact Us</a></li>
-                    <li><a href="privacy.php">Privacy Policy</a></li>
-                    <li><a href="terms.php">Terms and Condition</a></li>
-                    </ul>
-                </div>
-                <div class="social-info">
-                    <h3>Follow Us</h3>
-                    <li><a href="#"><i class='bx bxl-facebook-circle'></i></a></li>
-                    <li><a href="#"><i class='bx bxl-instagram-alt' ></i></a></li>
-                </div>
-            </div>
-        </section>
-    </footer>
+<?php include 'includes/footer.php'; ?>
 
-    <section class="copyright">
-        <p>Copyright @2024. All Right Reserved.Desingd By SLIIT Student</p>
-
-    </section>
-
-    <script>
-        let prevScrollPos = window.pageYOffset;
-        const navbar = document.getElementById("navbar");
-
-        window.onscroll = function() {
-        let currentScrollPos = window.pageYOffset;
-    
-        if (prevScrollPos > currentScrollPos) {
-            // Scrolling up, show the navbar
-            navbar.style.top = "0";
-        } else {
-            // Scrolling down, hide the navbar
-            navbar.style.top = "-100px";  // Adjust to match the navbar height
-        }
-        prevScrollPos = currentScrollPos;
-    }
-    </script>
-
-    
-</body>
-</html>
