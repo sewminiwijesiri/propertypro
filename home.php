@@ -304,10 +304,10 @@ include 'includes/header.php';
 <section class="hero">
     <h1>Find Your <span style="color: var(--blue)">Perfect</span> Piece of Heaven</h1>
     <p>Luxury villas, modern apartments, and prime lands. We connect verified buyers and premium sellers across the island.</p>
-    <div class="search-container">
-        <input type="text" placeholder="Search location (e.g. Colombo 7, Kandy...)">
-        <button class="search-btn">Find Your Home</button>
-    </div>
+    <form action="property.php" method="GET" class="search-container">
+        <input type="text" name="search" id="searchInput" placeholder="Search location (e.g. Colombo 7, Kandy...)" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+        <button type="submit" class="search-btn">Find Your Home</button>
+    </form>
 </section>
 
 <section class="stats">

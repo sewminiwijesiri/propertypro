@@ -1,6 +1,17 @@
 <?php
 require 'includes/config.php';
-$query = "SELECT * FROM post WHERE status = 'Approved'";
+
+// Get search query if exists
+$searchQuery = isset($_GET['search']) ? trim($_GET['search']) : '';
+
+// Build SQL query with search filter
+if (!empty($searchQuery)) {
+    $searchTerm = '%' . $conn->real_escape_string($searchQuery) . '%';
+    $query = "SELECT * FROM post WHERE status = 'Approved' AND (location LIKE '$searchTerm' OR type LIKE '$searchTerm' OR description LIKE '$searchTerm') ORDER BY postID DESC";
+} else {
+    $query = "SELECT * FROM post WHERE status = 'Approved' ORDER BY postID DESC";
+}
+
 $result = mysqli_query($conn, $query);
 
 $pageTitle = "Properties";
@@ -183,15 +194,30 @@ include 'includes/header.php';
         opacity: 0.3;
     }
 
+    /* Search input styling */
+    input[name="search"]::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+    }
+
     @media (max-width: 768px) {
         .page-header h1 { font-size: 2.2rem; }
     }
 </style>
 
+
 <header class="page-header">
-    <h1>Find Your Home</h1>
-    <p>Explore verified property listings from top sellers across Sri Lanka</p>
+    <h1><?php echo !empty($searchQuery) ? 'Search Results' : 'Find Your Home'; ?></h1>
+    <p><?php echo !empty($searchQuery) ? 'Showing results for "' . htmlspecialchars($searchQuery) . '"' : 'Explore verified property listings from top sellers across Sri Lanka'; ?></p>
+    
+    <form action="property.php" method="GET" style="max-width: 600px; margin: 2rem auto 0; display: flex; gap: 1rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 0.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2);">
+        <input type="text" name="search" placeholder="Search by location or property type..." value="<?php echo htmlspecialchars($searchQuery); ?>" style="flex: 1; background: transparent; border: none; outline: none; color: white; padding: 0.8rem 1.5rem; font-size: 1rem;">
+        <button type="submit" style="background: var(--blue); color: white; padding: 0.8rem 2rem; border: none; border-radius: 15px; font-weight: 700; cursor: pointer;">Search</button>
+        <?php if (!empty($searchQuery)): ?>
+            <a href="property.php" style="background: rgba(255,255,255,0.2); color: white; padding: 0.8rem 1.5rem; border-radius: 15px; text-decoration: none; font-weight: 700;">Clear</a>
+        <?php endif; ?>
+    </form>
 </header>
+
 
 <div class="filters">
     <button class="filter-btn active">All Properties</button>
@@ -207,7 +233,7 @@ include 'includes/header.php';
             ?>
             <div class="prop-card">
                 <div class="prop-img-box">
-                    <img src="<?php echo $row['img']; ?>" alt="Property">
+                    <img src="<?php echo $row['img'] ? 'dashboard/seller/' . htmlspecialchars($row['img']) : 'assets/images/placeholder.jpg'; ?>" alt="Property">
                     <div class="prop-status"><i class='bx bxs-check-shield'></i> Verified</div>
                 </div>
                 <div class="prop-content">
@@ -225,9 +251,51 @@ include 'includes/header.php';
             <?php
         }
     } else {
-        echo '<div class="no-results"><i class="bx bx-search"></i><h3>No properties found</h3><p>Try searching for a different location or category.</p></div>';
+        if (!empty($searchQuery)) {
+            echo '<div class="no-results"><i class="bx bx-search"></i><h3>No properties found for "' . htmlspecialchars($searchQuery) . '"</h3><p>Try searching with different keywords or <a href="property.php" style="color: var(--blue); font-weight: 700;">browse all properties</a>.</p></div>';
+        } else {
+            echo '<div class="no-results"><i class="bx bx-search"></i><h3>No properties found</h3><p>Check back soon for new listings.</p></div>';
+        }
     }
     ?>
 </div>
+
+<script>
+    // Handle filter buttons
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const propCards = document.querySelectorAll('.prop-card');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Remove active class from all buttons
+            filterBtns.forEach(b => b.classList.remove('active'));
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            const filterType = this.textContent.trim();
+            
+            // Show/hide properties based on filter
+            propCards.forEach(card => {
+                const propTitle = card.querySelector('.prop-title').textContent;
+                
+                if (filterType === 'All Properties') {
+                    card.style.display = 'block';
+                } else {
+                    if (propTitle.toLowerCase().includes(filterType.toLowerCase())) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        });
+    });
+
+    // Add placeholder input styling
+    const searchInputs = document.querySelectorAll('input[name="search"]');
+    searchInputs.forEach(input => {
+        input.style.setProperty('color', 'white', 'important');
+    });
+</script>
 
 <?php include 'includes/footer.php'; ?>

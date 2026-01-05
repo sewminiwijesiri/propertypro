@@ -2,11 +2,8 @@
 includes/config.php
 
 # Environment Files
-.env
-.env.local
 
 # IDEs and Editors
-.vscode/
 .idea/
 *.swp
 *.swo
@@ -36,3 +33,4 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+config.bat

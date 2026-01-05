@@ -1,10 +1,18 @@
-<?php
-    require '../../includes/config.php';
+session_start();
+require '../../includes/config.php';
 
-    if($_SERVER['REQUEST_METHOD']=='POST'){
-        $pID=$_POST["postid"];
+if (!isset($_SESSION['sellerID'])) {
+    header("Location: ../../login.php");
+    exit();
+}
 
-        $sql="DELETE FROM post WHERE postID='$pID'";
+$sellerID = $_SESSION['sellerID'];
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['postid'])) {
+    $pID = $conn->real_escape_string($_POST["postid"]);
+
+    // Security check: Ensure this post belongs to the logged-in seller
+    $sql = "DELETE FROM post WHERE postID = '$pID' AND sellerID = '$sellerID'";
 
         if($conn->query($sql)==TRUE)
         {
