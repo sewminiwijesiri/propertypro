@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Farro:wght@300;400;500;700&family=KoHo:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@500&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400&family=Roboto:wght@100&family=Source+Code+Pro:wght@599&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Farro:wght@300;400;500;700&family=KoHo:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:wght@300..800&family=Oswald:wght@500&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400&family=Roboto:wght@100&family=Source+Code+Pro:wght@599&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Farro:wght@300;400;500;700&family=KoHo:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:wght@300..800&family=Oswald:wght@500&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400&family=Roboto:wght@100&family=Source+Code+Pro:wght@599&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial,sans-serif;
+    background-image: url(../images/back2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+
+}
+
+.head{
+    display: flex;
+    background-color: rgba(255,255,255,0.4);
+    margin-bottom: 50px;
+}
+
+.head h1{
+    text-align: justify;
+    padding: 20px;
+    font-family: Bebas Neue;
+    font-size: 40px;
+
+}
+
+.head h1 span{
+    color: rgb(28, 65, 168);
+    font-family: Orbitron;
+
+}
+
+main {
+    display: flex;
+    padding: 30px;
+}
+
+.sidebar {
+    width: 200px;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 70px;
+    border-radius: 10px;
+}
+
+.sidebar button {
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.sidebar button:hover {
+    background-color: #555;
+}
+
+.sidebar a{
+    text-decoration: none;
+    color: #ccc;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.main-content h1 {
+    margin-bottom: 20px;
+}
+
+.pending-approval {
+    background-color: rgba(255,255,255,0.4);
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.posts-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+.post-item {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 300px;
+    padding: 20px;
+   
+}
+
+img {
+    display: flex;
+}
+
+.post-item p {
+    margin: 10px 0;
+    padding: 5px;
+    font-size: 16px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.4s;
+}
+
+button.approve {
+    background-color: #4CAF50;
+    color: white;
+}
+
+button.approve:hover {
+    background-color: #45a049;
+}
+
+button.remove {
+    background-color: #f44336;
+    color: white;
+}
+
+button.remove:hover {
+    background-color: #e53935;
+}
+
+
+
+@media (max-width: 1024px) {
+    main {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .sidebar {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .posts-container {
+        justify-content: center;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .posts-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .post-item {
+        width: 100%;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .post-item p {
+        font-size: 14px;
+    }
+
+    .sidebar {
+        padding: 10px;
+    }
+
+    .sidebar button {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .head h1 {
+        font-size: 30px;
+        padding: 15px;
+    }
+}

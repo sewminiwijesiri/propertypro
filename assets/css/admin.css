@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url(../images/back2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+}
+
+.main-head{
+    display: flex;
+    background-color: rgba(255,255,255,0.4);
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.head h1{
+    text-align: justify;
+    padding-left: 20px;
+    font-family: Bebas Neue;
+    font-size: 40px;
+
+}
+
+.head h1 span{
+    color: rgb(28, 65, 168);
+    font-family: Orbitron;
+
+}
+
+
+.manage-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px;
+   
+
+}
+
+/* Sidebar */
+.manage-sidebar {
+    width: 20%;
+    background-color:  rgba(225, 225, 225, 0.4);
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    height:auto;
+    text-decoration: none;
+
+    
+}
+
+
+
+.manage-sidebar  button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #48525a;
+    border-radius: 5px;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+  
+}
+.manage-sidebar  a{
+    text-decoration: none;
+    color: white;
+}
+
+.manage-sidebar  button:hover {
+    background-color: #555;
+    color: #ff0000; /
+}
+
+
+.main-content {
+    width: 75%;
+}
+
+.monthly-report {
+    background-color:  rgba(225, 225, 225, 0.4);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
+}
+
+#generateReportButton {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+#generateReportButton:hover{
+    background-color: #555;
+    cursor: pointer;
+}
+
+
+.results {
+    text-align: center; 
+    margin-top: 20px; 
+    border:2px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+
+}
+
+.header {
+    display: flex;
+    justify-content: center; 
+    gap: 60px; 
+    margin-right: 30px;
+    margin-top: 10px;
+    font-weight: bold;
+    
+ 
+
+}
+.header p{
+    color: #000000;
+    font-weight: 300%;
+    font-size: 28px;
+    gap: -0.5px;
+}
+
+.label1 {
+    font-size: 20px; 
+    color: #333; 
+    padding-left: 25px;
+}
+.label {
+    font-size: 20px; 
+    color: #333;
+}
+
+.count-boxes {
+    display: flex; 
+    justify-content: center; 
+    margin-top: 0; 
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+.count-box {
+    width: 140px; 
+    height: 80px; 
+    background-color: rgba(103, 245, 255, 0.418); 
+    border:1px solid #ccc;
+    border-radius: 10px; 
+    margin: 0 10px; 
+    text-align: center; 
+    margin-top: 20px;
+}
+
+.count-box p {
+    margin-top: 10px; 
+    font-size: 22px; 
+    color: #000000; 
+    display: flex; 
+    justify-content: center; 
+    font-weight: 400;
+}
+.update-seller {
+    background-color:  rgba(225, 225, 225, 0.4); 
+    padding: 20px; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px; 
+}
+
+.update-seller h2 {
+    margin-bottom: 15px; 
+    font-size: 24px; 
+    color: #000000; 
+}
+
+.update-seller form {
+    display: flex; 
+    flex-direction: column;
+    
+}
+
+.update-seller label {
+    margin-bottom: 5px; 
+    font-weight: bold; 
+    color: #555; 
+}
+
+.update-seller input[type="text"],
+.update-seller input[type="email"] {
+    padding: 10px;
+    margin-bottom: 15px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    font-size: 16px; 
+    background-color:  rgba(225, 225, 225, 0.4);
+    color: #000000;
+}
+
+.update-seller button[type="submit"] {
+    background-color: #007bff; 
+    color: white; 
+    padding: 10px; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer;
+    font-size: 16px; 
+}
+
+.update-seller button[type="submit"]:hover {
+    background-color: #0056b3; 
+    transition: background-color 0.3s; }
+.update-seller p{
+   color: #000000;
+
+}
+
+
+@media (max-width: 800px) {
+    .manage-container {
+        flex-direction: column;
+        align-items: center; 
+    }
+
+    .manage-sidebar {
+        width: 100%;
+        margin-bottom: 20px; 
+    }
+
+    .main-content {
+        width: 100%;
+    }
+
+    .header {
+        flex-direction: column; 
+        gap: 20px; 
+    }
+
+    .count-box {
+        width: 100%; 
+        margin: 10px 0; 
+    }
+}

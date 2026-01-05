@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Farro:wght@300;400;500;700&family=KoHo:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@500&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400&family=Roboto:wght@100&family=Source+Code+Pro:wght@599&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Farro:wght@300;400;500;700&family=KoHo:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:wght@300..800&family=Oswald:wght@500&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400&family=Roboto:wght@100&family=Source+Code+Pro:wght@599&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Farro:wght@300;400;500;700&family=KoHo:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:wght@300..800&family=Oswald:wght@500&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400&family=Roboto:wght@100&family=Source+Code+Pro:wght@599&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-image: url(../images/back2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+   
+}
+
+.head{
+    display: flex;
+    background-color: rgba(255,255,255,0.4);
+    margin-bottom: 50px;
+}
+
+.head h1{
+    text-align: justify;
+    padding-left: 20px;
+    font-family: Bebas Neue;
+    font-size: 40px;
+
+}
+
+.head h1 span{
+    color: rgb(28, 65, 168);
+    font-family: Orbitron;
+
+}
+
+.dashboard-container {
+    margin: 20px;
+    display: flex;
+    
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 20px 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    background-color: #444;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.sidebar ul li a:hover {
+    background-color: #555;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: rgba(255,255,255,0.4);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+h2 {
+    text-align: center;
+}
+
+
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input[type="text"], input[type="number"], textarea, input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+}
+
+input[type="file"] {
+    padding: 5px;
+}
+
+button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.posts-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.post-item {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 300px; 
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+}
+
+.post-item img {
+    width: 100%;
+    height: auto;
+}
+
+.post-item .description {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word; 
+}
+
+.delete[type="submit"] {
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.delete[type="submit"]:hover {
+    background-color: darkred;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%; 
+        margin-bottom: 20px; 
+    }
+
+    .dashboard-container {
+        flex-direction: column; 
+    }
+
+    .post-item {
+        width: 100%; 
+    }
+}
+
+@media (max-width: 576px) {
+    .main-content {
+        margin-right: 0;
+    }
+
+    .dashboard-container {
+        margin: 10px; 
+    }
+
+    button {
+        padding: 10px; 
+    }
+}
+
+

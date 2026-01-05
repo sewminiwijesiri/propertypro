@@ -1,0 +1,105 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-image: url(../images/back2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    padding-top: 50px; 
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 60%; 
+    max-width: 400px; 
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: auto;
+    margin-bottom: 50%;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #000000;
+}
+
+input {
+    width: 93%; 
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+input:focus {
+    border-color: #333;
+    outline: none;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    background: #333;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+}
+
+.btn:hover {
+    background-color: #555;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .container {
+        width: 80%; /* Wider on medium screens */
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 22px; /* Slightly smaller title */
+    }
+
+    input {
+        font-size: 15px; /* Smaller input text */
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 95%; /* Full width on small screens */
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 20px; /* Smaller title for small screens */
+    }
+
+    input {
+        font-size: 14px; /* Smaller input text */
+    }
+
+    .btn {
+        padding: 10px; 
+        font-size: 14px; /* Smaller button text */
+    }
+}
