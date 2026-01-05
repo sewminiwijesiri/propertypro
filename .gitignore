@@ -1,0 +1,38 @@
+# Database Configuration
+includes/config.php
+
+# Environment Files
+.env
+.env.local
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS specific files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# User Uploads
+uploads/
+assets/images/properties/*
+!assets/images/properties/.gitkeep
+
+# Web Server specific
+.htaccess
+error_log
+
+# Node (in case it's used later)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
